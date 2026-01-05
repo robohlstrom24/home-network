@@ -18,3 +18,90 @@ This project demonstrates foundational network administration supporting endpoin
 - Introduce a virtualized lab server to demonstrate server hosting concepts and support additional infrastructure services  
 - Implement a VPN solution to enable secure remote access and simulate off-site connectivity scenarios  
 - Add network monitoring or health checks to increase visibility into device availability and performance (PowerShell)  
+
+
+### Switch Setup & Baseline Connectivity
+- Connected and validated a gigabit switch uplink and endpoint access ports
+- Verified DHCP assignment and subnet consistency across endpoints
+- Confirmed Layer 2 and Layer 3 connectivity with firewall-aware testing
+
+<details>
+<summary>Implementation Details</summary>
+
+Connected a **:contentReference[oaicite:0]{index=0} 8-port Gigabit desktop switch** to the router and lab endpoints:
+
+- **Port 1 (uplink):** Router  
+- **Port 2:** OptiPlex desktop  
+- **Port 3:** ThinkPad laptop  
+
+Observed green link/activity LEDs on all three ports, indicating active **1 Gbps Ethernet connections**.
+
+Ran `ipconfig /all` on both endpoints to document host identity, IP addressing, and DHCP lease details.
+
+**Desktop**
+- Hostname: `Rob-Desktop`
+- IPv4 Address: `192.168.0.158/24`
+- Default Gateway: `192.168.0.1`
+- DHCP Server: `192.168.0.1`
+- MAC Address: `54-BF-64-7B-CE-20`
+
+**Laptop**
+- Hostname: `Rob-Laptop`
+- IPv4 Address: `192.168.0.63/24`
+- Default Gateway: `192.168.0.1`
+- DHCP Server: `192.168.0.1`
+- MAC Address: `8C-16-45-3E-DA-64`
+
+Confirmed both endpoints were assigned addresses within the same subnet (`192.168.0.0/24`), validating correct DHCP scope configuration.
+
+**Connectivity Testing**
+- Enabled Windows Defender Firewall rules for ICMP echo requests
+- Performed bidirectional `ping` tests between endpoints
+- Verified successful ICMP responses with no packet loss
+
+**Outcome:**  
+Established baseline Layer 2 and Layer 3 connectivity, validated DHCP functionality, and documented core lab endpoints.  
+Baseline connectivity validation supports downstream services including domain authentication, DHCP reservations, and server role deployment.
+
+</details>
+
+---
+
+### DHCP Addressing Plan & Basic DNS
+- Defined a predictable DHCP scope and static address strategy
+- Implemented DHCP reservations for key lab endpoints
+- Centralized DNS forwarding with external resolution validation
+
+<details>
+<summary>Implementation Details</summary>
+
+Performed baseline network hardening and established a predictable IP addressing strategy to support lab services and future expansion.
+
+**Router Hardening & DHCP Scope**
+- Updated router default credentials and applied latest firmware (network infrastructure hardening)
+- Configured DHCP address pool:  
+  `192.168.0.100–192.168.0.199`
+- Reserved static address block outside DHCP scope:  
+  `192.168.0.200–192.168.0.254` (future appliances and ad-hoc lab testing)
+
+**DHCP Reservations**
+Configured DHCP reservations within the active scope for key lab endpoints:
+
+- **Desktop:**  
+  MAC `54-BF-64-7B-CE-20` → `192.168.0.198`
+- **Laptop:**  
+  MAC `8C-16-45-3E-DA-64` → `192.168.0.101`
+
+Released and renewed DHCP leases on both hosts and confirmed that each endpoint obtained its reserved IP address.
+
+**DNS Configuration & Validation**
+- Configured upstream DNS resolvers to **:contentReference[oaicite:1]{index=1}** (`1.1.1.1` / `1.0.0.1`) for performance and privacy
+- Client systems use the router (`192.168.0.1`) as their DNS server, which forwards queries upstream
+- Verified external name resolution using:  
+  `nslookup www.google.com 1.1.1.1`
+
+**Outcome:**  
+Endpoints have predictable, reserved IP addressing with verified DNS resolution.  
+The addressing plan supports stable identity services, server roles, and future lab growth.
+
+</details>
