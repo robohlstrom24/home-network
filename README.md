@@ -17,9 +17,7 @@ This project demonstrates foundational network administration supporting endpoin
 ## Scope of Work
 
 ### Switch Setup & Baseline Connectivity
-- Connected and validated a gigabit switch uplink and endpoint access ports
-- Verified DHCP assignment and subnet consistency across endpoints
-- Confirmed Layer 2 and Layer 3 connectivity 
+- Endpoint documentation, subnet consistency, Layer 2/3 connectivity
 
 <details>
 <summary>Implementation Details</summary>
@@ -48,7 +46,7 @@ Ran `ipconfig /all` on both endpoints to document host identity, IP addressing, 
 - DHCP Server: `192.168.0.1`
 - MAC Address: `8C-16-45-3E-DA-64`
 
-Confirmed both endpoints were assigned addresses within the same subnet (`192.168.0.0/24`), validating correct DHCP scope configuration.
+- Confirmed both endpoints were assigned addresses within the same subnet (`192.168.0.0/24`), validating correct DHCP scope configuration.
 
 **Connectivity Testing**
 - Enabled Windows Defender Firewall rules for ICMP echo requests
@@ -56,22 +54,20 @@ Confirmed both endpoints were assigned addresses within the same subnet (`192.16
 - Verified successful ICMP responses with no packet loss
 
 **Outcome:**  
-Established baseline Layer 2 and Layer 3 connectivity, validated DHCP functionality, and documented core lab endpoints.  
-Baseline connectivity validation supports downstream services including domain authentication, DHCP reservations, and server role deployment.
+- Established baseline Layer 2 and Layer 3 connectivity, validated DHCP functionality, and documented core lab endpoints.  
+- Baseline connectivity validation supports downstream services including domain authentication, DHCP reservations, and server role deployment.
 
 </details>
 
 ---
 
 ### DHCP Addressing Plan & Basic DNS
-- Defined a predictable DHCP scope and static address strategy
-- Implemented DHCP reservations for key lab endpoints
-- Centralized DNS forwarding with external resolution validation
+- Router hardening, DHCP scope/reservations, DNS configuration/validation
 
 <details>
 <summary>Implementation Details</summary>
 
-Performed baseline network hardening and established a predictable IP addressing strategy to support lab services and future expansion.
+- Performed baseline network hardening and established a predictable IP addressing strategy to support lab services and future expansion.
 
 **Router Hardening & DHCP Scope**
 - Updated router default credentials and applied latest firmware (network infrastructure hardening)
@@ -97,8 +93,8 @@ Released and renewed DHCP leases on both hosts and confirmed that each endpoint 
   `nslookup www.google.com 1.1.1.1`
 
 **Outcome:**  
-Endpoints have predictable, reserved IP addressing with verified DNS resolution.  
-The addressing plan supports stable identity services, server roles, and future lab growth.
+- Endpoints have predictable, reserved IP addressing with verified DNS resolution.
+- Addressing plan supports stable identity services, server roles, and future lab growth.
 
 </details>
 
