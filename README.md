@@ -17,7 +17,7 @@ This project demonstrates foundational network administration supporting endpoin
 ## Scope of Work
 
 ### Switch Setup & Baseline Connectivity
-- Endpoint documentation, subnet consistency, Layer 2/3 connectivity
+Endpoint documentation, subnet consistency, Layer 2/3 connectivity
 
 <details>
 <summary>Implementation Details</summary>
@@ -62,7 +62,7 @@ Ran `ipconfig /all` on both endpoints to document host identity, IP addressing, 
 ---
 
 ### DHCP Addressing Plan & Basic DNS
-- Router hardening, DHCP scope/reservations, DNS configuration/validation
+Router hardening, DHCP scope/reservations, DNS configuration/validation
 
 <details>
 <summary>Implementation Details</summary>
